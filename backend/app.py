@@ -5,6 +5,7 @@ import random
 app = Flask(__name__)
 CORS(app)
 
+# List of emotions and their confidence scores to pick randomly 
 EMOTIONS = [
     ("Happy", 0.92),
     ("Sad", 0.78),
@@ -14,6 +15,7 @@ EMOTIONS = [
     ("Angry", 0.75)
 ]
 
+# Route to analyze the emotion of the text
 @app.route('/analyze', methods=['POST'])
 def analyze():
     data = request.get_json()
@@ -25,5 +27,7 @@ def analyze():
         "confidence": confidence
     })
 
+
+# For me to run the app locally
 if __name__ == '__main__':
     app.run(debug=True)

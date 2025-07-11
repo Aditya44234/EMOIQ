@@ -1,14 +1,15 @@
 import React, { useState } from 'react';
 import './App.css';
 
-const API_URL = '/analyze';
+const API_URL = '/analyze'; // To store the API URL from app.py in the backend
 
 function App() {
-  const [text, setText] = useState('');
-  const [loading, setLoading] = useState(false);
-  const [result, setResult] = useState<{emotion: string, confidence: number} | null>(null);
-  const [error, setError] = useState<string | null>(null);
+  const [text, setText] = useState(''); // To store the text input
+  const [loading, setLoading] = useState(false); // To show the loading state if the API is working 
+  const [result, setResult] = useState<{emotion: string, confidence: number} | null>(null); // To store the result of the API
+  const [error, setError] = useState<string | null>(null); // To show the error if the API is not working
 
+  // To handle the submission of the form
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
@@ -18,7 +19,7 @@ function App() {
       const response = await fetch(API_URL, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ text })
+        body: JSON.stringify({text})
       });
       // To Handle the error if the API is not working
       if (!response.ok) throw new Error('API error');
